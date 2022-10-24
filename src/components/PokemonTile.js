@@ -2,8 +2,6 @@ import '../styles/PokemonTile.css';
 
 function PokemonTile({ pokemon }) {
 
-  console.log(pokemon);
-
   return (
     <div className="pokemon-tile">
 

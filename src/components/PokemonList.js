@@ -1,13 +1,17 @@
 import PokemonTile from "./PokemonTile";
 import '../styles/PokemonList.css';
+import { useEffect } from 'react';
 
-function PokemonList({ pokemons }) {
+function PokemonList({ pokemons, inputValue }) {
+
+  useEffect(() => {}, [inputValue]);
 
   return (
     <div className="pokemon-list">
-      {pokemons.map((pokemon, idx) => {
-        return <PokemonTile key={pokemon.id} pokemon={pokemon}/>;
-      })}
+      {pokemons
+        .filter(pokemon => pokemon.name.toLowerCase().includes(inputValue.toLowerCase()))
+        .map(pokemon => <PokemonTile key={pokemon.id} pokemon={pokemon}/>)
+      }
     </div>
   );
 }
