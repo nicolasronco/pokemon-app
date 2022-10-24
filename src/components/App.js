@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <Banner />
-      <PokemonList />
+      <PokemonList pokemons={pokemons}/>
     </div>
   );
 }

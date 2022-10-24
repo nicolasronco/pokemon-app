@@ -1,14 +1,48 @@
-function PokemonTile(props) {
+import '../styles/PokemonTile.css';
 
-  const pokemon = props.pokemon;
+function PokemonTile({ pokemon }) {
+
+  console.log(pokemon);
 
   return (
-    <li className="pokemon-tile">
-      <h3>{pokemon.name}</h3>
-      <div className="pokemon-tile-desc">
-        {pokemon.description}
+    <div className="pokemon-tile">
+
+      <div className="pokemon-tile-header">
+
+        <div className="pokemon-tile-header-left">
+          <div className="pokemon-name">
+            {pokemon.name.toUpperCase()}
+            <span> (No. {pokemon.id}) </span>
+          </div>
+
+          <div className="pokemon-height">Height: {pokemon.height / 10}m</div>
+          <div className="pokemon-weight">Weight: {pokemon.weight / 10}kg</div>
+
+          <div className="pokemon-type">
+            Types: [ {pokemon.types.map((type, idx) => idx === 0 ? type.type.name.toUpperCase() : ', ' + type.type.name.toUpperCase())} ]
+          </div>
+        </div>
+
+        <div className="pokemon-tile-header-right">
+          <img className="pokemon-img" src={pokemon.sprites['front_default']} alt={pokemon.name + '-front-img'}></img>
+        </div>
+
       </div>
-    </li>
+
+      <div className="pokemon-tile-body">
+        <div className="pokemon-tile-body-title">MOVES</div>
+        <div className="pokemon-moves">
+          <div className="moves">
+            <div>{pokemon.moves[0].move.name.toUpperCase()}</div>
+            <div>{pokemon.moves[1].move.name.toUpperCase()}</div>
+          </div>
+          <div className="moves">
+            <div>{pokemon.moves[2].move.name.toUpperCase()}</div>
+            <div>{pokemon.moves[3].move.name.toUpperCase()}</div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
