@@ -7,15 +7,35 @@ import SearchInput from './SearchInput';
 function App() {
   const [pokemons, updatePokemons] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  let offset = 0;
+
+  const fetchPokemons = async () => {
+    try {
+      const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10&offset=' + offset);
+      const jsonObj = await res.json();
+      const responses = await Promise.all(jsonObj.results.map(r => fetch(r.url)));
+      const fetchedPokemons = await Promise.all(responses.map(res => res.json()));
+      updatePokemons(previousPokemon => {
+        const newPokemons = [...previousPokemon, ...fetchedPokemons];
+        return newPokemons.sort((a, b) => a.id - b.id);
+      });
+    } catch (e) { console.error(e); }
+  };
+
+  const handleScroll = (e) => {
+    const scrollTop = e.target.documentElement.scrollTop;
+    const scrollHeight = e.target.documentElement.scrollHeight;
+    const windowHeight = window.innerHeight;
+
+    if (scrollTop + windowHeight + 1 >= scrollHeight) {
+      offset += 10;
+      fetchPokemons();
+    }
+  };
 
   useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=10&offset=60')
-      .then(res => res.json())
-      .then(jsonObj => Promise.all(jsonObj.results.map(r => fetch(r.url))))
-      .then(responses => Promise.all(responses.map(r => r.json())))
-      .then(fetchedPokemons => {
-        return updatePokemons(fetchedPokemons);
-      });
+    fetchPokemons();
+    window.addEventListener('scroll', handleScroll);
   }, []);
 
   return (

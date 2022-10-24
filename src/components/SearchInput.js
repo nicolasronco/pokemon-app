@@ -8,6 +8,7 @@ function SearchInput({ inputValue, setInputValue }) {
         type= 'text'
         name= 'pokemon_search'
         value= {inputValue}
+        placeholder= 'Search a Pokemon'
         onChange= {(e) => setInputValue(e.target.value)}
       >
       </input>

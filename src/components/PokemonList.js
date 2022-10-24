@@ -1,4 +1,4 @@
-import PokemonTile from "./PokemonTile";
+import PokemonTile from './PokemonTile';
 import '../styles/PokemonList.css';
 import { useEffect } from 'react';
 

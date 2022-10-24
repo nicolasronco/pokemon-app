@@ -31,12 +31,12 @@ function PokemonTile({ pokemon }) {
         <div className="pokemon-tile-body-title">MOVES</div>
         <div className="pokemon-moves">
           <div className="moves">
-            <div>{pokemon.moves[0].move.name.toUpperCase()}</div>
-            <div>{pokemon.moves[1].move.name.toUpperCase()}</div>
+            {pokemon.moves && pokemon.moves.length >= 1 && <div>{pokemon.moves[0].move.name.toUpperCase()}</div>}
+            {pokemon.moves && pokemon.moves.length >= 2 && <div>{pokemon.moves[1].move.name.toUpperCase()}</div>}
           </div>
           <div className="moves">
-            <div>{pokemon.moves[2].move.name.toUpperCase()}</div>
-            <div>{pokemon.moves[3].move.name.toUpperCase()}</div>
+            {pokemon.moves && pokemon.moves.length >= 3 && <div>{pokemon.moves[2].move.name.toUpperCase()}</div>}
+            {pokemon.moves && pokemon.moves.length >= 4 && <div>{pokemon.moves[3].move.name.toUpperCase()}</div>}
           </div>
         </div>
       </div>
