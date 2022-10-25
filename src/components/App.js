@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Banner from './Banner';
+import SearchInput from './SearchInput';
 import PokemonList from './PokemonList/PokemonList';
 import PokemonDetailedTile from './PokemonList/PokemonTileDetailed';
-import SearchInput from './SearchInput';
 import BackButton from './BackButton';
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
       const jsonObj = await res.json();
       const responses = await Promise.all(jsonObj.results.map(r => fetch(r.url)));
       const fetchedPokemons = await Promise.all(responses.map(res => res.json()));
+
       updatePokemons(previousPokemon => {
         const newPokemons = [...previousPokemon, ...fetchedPokemons];
         return newPokemons.sort((a, b) => a.id - b.id);
@@ -25,9 +26,11 @@ function App() {
   };
 
   const fetchPokemonById = async ({ params }) => {
-    const res = await fetch('https://pokeapi.co/api/v2/pokemon/' + params.id);
-    const jsonObj = await res.json();
-    return jsonObj;
+    try {
+      const res = await fetch('https://pokeapi.co/api/v2/pokemon/' + params.id);
+      const jsonObj = await res.json();
+      return jsonObj;
+    } catch (error) { console.error(error); }
   };
 
   const handleScroll = (e) => {
