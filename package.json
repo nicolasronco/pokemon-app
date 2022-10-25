@@ -8,7 +8,8 @@
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
+    "react-router-dom": "^6.4.2",
+    "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -22,15 +23,28 @@
       "react-app",
       "react-app/jest"
     ],
-    "plugins": ["react-hooks"],
+    "plugins": [
+      "react-hooks"
+    ],
     "rules": {
-      "indent": ["error", 2, {
-          "ignoredNodes": ["FunctionExpression"],
+      "indent": [
+        "error",
+        2,
+        {
+          "ignoredNodes": [
+            "FunctionExpression"
+          ],
           "SwitchCase": 1
         }
       ],
-      "quotes": ["error", "single"],
-      "semi": ["error", "always"],
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ],
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn"
     }

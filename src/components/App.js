@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Banner from './Banner';
 import PokemonList from './PokemonList';
+import PokemonDetailedTile from './PokemonDetailedTile';
 import SearchInput from './SearchInput';
 
 function App() {
@@ -19,7 +20,13 @@ function App() {
         const newPokemons = [...previousPokemon, ...fetchedPokemons];
         return newPokemons.sort((a, b) => a.id - b.id);
       });
-    } catch (e) { console.error(e); }
+    } catch (error) { console.error(error); }
+  };
+
+  const fetchPokemonById = async ({ params }) => {
+    const res = await fetch('https://pokeapi.co/api/v2/pokemon/' + params.id);
+    const jsonObj = await res.json();
+    return jsonObj;
   };
 
   const handleScroll = (e) => {
@@ -33,6 +40,22 @@ function App() {
     }
   };
 
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      errorElement: <div>Sorry not found !</div>,
+      element: <React.Fragment>
+        <SearchInput inputValue={inputValue} setInputValue={setInputValue}/>
+        <PokemonList pokemons={pokemons} inputValue={inputValue}/>
+      </React.Fragment>
+    }, {
+      path: '/:id',
+      element: <PokemonDetailedTile/>,
+      errorElement: <div>Sorry not found !</div>,
+      loader: fetchPokemonById
+    }
+  ]);
+
   useEffect(() => {
     fetchPokemons();
     window.addEventListener('scroll', handleScroll);
@@ -41,8 +64,7 @@ function App() {
   return (
     <div className="App">
       <Banner />
-      <SearchInput inputValue={inputValue} setInputValue={setInputValue}/>
-      <PokemonList pokemons={pokemons} inputValue={inputValue}/>
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }

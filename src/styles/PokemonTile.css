@@ -1,11 +1,18 @@
-.pokemon-tile {
+.pokemon-tile, .pokemon-tile-detailed {
+  box-sizing: border-box;
   padding: 10px;
   background-color: white;
-  border: 1px solid black;
-  width: 400px;
+  border: 1px solid #d1d4d4;
+  width: 420px;
   margin: 10px auto;
   border-radius: 4px;
 }
+.pokemon-tile:hover {
+  border-color: #3d3d3d;
+  cursor: pointer;
+  box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
 
 .pokemon-tile-header, .moves {
   display: flex;
