@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Banner from './Banner';
-import PokemonList from './PokemonList';
-import PokemonDetailedTile from './PokemonDetailedTile';
+import PokemonList from './PokemonList/PokemonList';
+import PokemonDetailedTile from './PokemonList/PokemonTileDetailed';
 import SearchInput from './SearchInput';
+import BackButton from './BackButton';
 
 function App() {
   const [pokemons, updatePokemons] = useState([]);
@@ -50,8 +51,11 @@ function App() {
       </React.Fragment>
     }, {
       path: '/:id',
-      element: <PokemonDetailedTile/>,
       errorElement: <div>Sorry not found !</div>,
+      element: <React.Fragment>
+        <PokemonDetailedTile/>
+        <BackButton/>
+      </React.Fragment>,
       loader: fetchPokemonById
     }
   ]);

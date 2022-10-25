@@ -1,9 +1,8 @@
+import '../../styles/PokemonList.css';
 import PokemonTile from './PokemonTile';
-import '../styles/PokemonList.css';
 import { useEffect } from 'react';
 
 function PokemonList({ pokemons, inputValue }) {
-
   useEffect(() => {}, [inputValue]);
 
   const searchPokemon = (pokemon) => {

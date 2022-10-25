@@ -1,0 +1,14 @@
+.back-to-pokemons {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.back-button {
+  background-color: #CC092F;
+  color: white;
+  height: 30px;
+  width: 100px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid #CC092F;
+}

@@ -1,7 +1,6 @@
 import '../styles/SearchInput.css';
 
 function SearchInput({ inputValue, setInputValue }) {
-
   return (
     <div className="pokemon-search">
       <input
