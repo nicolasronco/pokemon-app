@@ -14,6 +14,12 @@ function PokemonList({ pokemons, inputValue }) {
     } else {
       const types = pokemon.types.map(type => type.type.name);
       isFound = types.find(type => type.includes(inputValue));
+
+      if(!isFound) {
+        let moves = (pokemon.moves.length >= 4 ? pokemon.moves.slice(0, 4) : pokemon.moves)
+          .map(move => move.move.name);;
+        isFound = moves.find(move => move.includes(inputValue));
+      }
     }
 
     return isFound;
